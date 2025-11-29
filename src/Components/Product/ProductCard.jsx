@@ -2,26 +2,36 @@ import React from 'react'
 import Rating from '@mui/material/Rating'
 import Currencyformat from '../Currencyformat/Currencyformat'
 import classes from './Product.module.css'
-function ProductCard({product}) {
+import { Link } from 'react-router-dom'
+function ProductCard({product,flex,renderDesc}) {
 
-  const {title,price,rating,image}= product;
+  const {
+    id = "",
+    title = "",
+    price = 0,
+    rating = { rate: 0, count: 0 },
+    image = "",
+    description = ""
+} = product;
+
   return (
-    <div className={classes.card_container}>
+    <div className={`${classes.card_container} ${flex?classes.product_flexed:''}`}>
 
-<a href="">
+<Link to={`/products/${id}`}>
 
 <img src={image} alt="" />
 
 
-</a>
+</Link>
 
-<h3>    {title}</h3>
+<h3>{title}</h3>
+{ renderDesc && <p>{description}</p> }
 <div className={classes.rating}>
     {/* {rating} */}
-    <Rating value={rating.rate} precision={0.1} />
+    <Rating value={rating?.rate} precision={0.1} />
 
 {/* count */}
-<small>{rating.count}</small>
+<small>{rating?.count}</small>
 </div>
 <div>
 
