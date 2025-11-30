@@ -2,13 +2,15 @@ import { Type } from "./actiontype";
 
 export const initialstate={
     basket:[],
-};
- export const reducer=(state,action)=>{
+}
 
-switch(action.type){
+export const reducer=(state,action)=>{
+
+switch (action.type){
     case Type.ADD_TO_BASKET:
         return{
-            ...state,basket:[...state.basket,action.item],
+            ...state,
+            basket:[...state.basket,action.item],
         }
 default:
     return state;
