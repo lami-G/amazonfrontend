@@ -20,10 +20,6 @@ img.map((imageItemLink)=>
 }
 )
 }
-
-
-
-
 </Carousel>
 <div className={classes.hero_img}></div>
 
