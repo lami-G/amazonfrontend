@@ -32,7 +32,7 @@ setLoading(false)
 {  
 products.map((singleProducts)=>{
 
-  return <ProductCard product={singleProducts} key={singleProducts.id}/>
+  return <ProductCard renderAdd={true} product={singleProducts} key={singleProducts.id}/>
 
 })
 }

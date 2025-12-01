@@ -5,7 +5,7 @@ import classes from './Product.module.css'
 import { Link } from 'react-router-dom'
 import { DataContext } from '../DataProvider/DataProvider'
 import { Type } from '../../Utility/actiontype'
-function ProductCard({product,flex,renderDesc}) {
+function ProductCard({product,flex,renderDesc,renderAdd}) {
 
   const {
      image,
@@ -62,11 +62,14 @@ dispatch({
     {/* {price} */}
 <Currencyformat amount={price} />
 </div>
+{
+renderAdd &&
 
 <button className={classes.button} onClick={addToCart}>
 
   add to cart
-</button>
+  </button>
+  }
     </div>
   )
 }

@@ -34,6 +34,7 @@ setloading(false)
         product={product}
         flex={true}
         renderDesc={true}
+        renderAdd={true}
         /> )}
       
       
