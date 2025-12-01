@@ -13,7 +13,7 @@ const Header = () => {
 console.log(state.basket.length)
   return (
     <>
-      <section>
+      <section className={classes.fixed}>
         <div className={classes.header_container}>
 
           {/* logo section */}
