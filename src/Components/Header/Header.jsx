@@ -9,8 +9,11 @@ import { SlLocationPin } from "react-icons/sl";
 
 
 const Header = () => {
-  const [state, dispatch] = useContext(DataContext);
-console.log(state.basket.length)
+  const [{basket}, dispatch] = useContext(DataContext);
+ const totalItem=basket?.reduce((amount,item)=>{
+    return item.amount + amount
+  },0)
+console.log(basket.length)
   return (
     <>
       <section className={classes.fixed}>
@@ -70,7 +73,7 @@ console.log(state.basket.length)
 
             <Link to="/cart" className={classes.cart}>
               <BiCart size={35} />
-              <span>{state.basket.length}</span>
+              <span>{totalItem}</span>
             </Link>
 
           </div>
