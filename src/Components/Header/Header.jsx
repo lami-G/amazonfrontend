@@ -6,7 +6,7 @@ import LowerHeader from "./LowerHeader";
 import { BiCart } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
-
+import {auth} from "../../Utility/firebase"
 
 const Header = () => {
   const [{user,basket}, dispatch] = useContext(DataContext);
@@ -68,17 +68,23 @@ console.log(basket.length)
               user?(
                 <>
                 <p> hello {user?.email?.split("@")[0]}  </p>
-                <span> Signout</span>
+                <span onClick={()=>auth.signOut()}> Signout</span>
                   </>
 
               ):(
-                <p>Hello, Sign in</p>
+
+                <>  <p>Hello, Sign in</p>
+                <span>
+
+                  Account & Lists
+                </span>
+                 </>
+               
               )
             
             }
             </div>
-              {/* <p>Sign In</p> */}
-              <span>Account & Lists</span>
+             
             </Link>
 
             <Link to="/orders">
