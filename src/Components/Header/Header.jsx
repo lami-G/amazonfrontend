@@ -9,7 +9,7 @@ import { SlLocationPin } from "react-icons/sl";
 
 
 const Header = () => {
-  const [{basket}, dispatch] = useContext(DataContext);
+  const [{user,basket}, dispatch] = useContext(DataContext);
  const totalItem=basket?.reduce((amount,item)=>{
     return item.amount + amount
   },0)
@@ -61,8 +61,23 @@ console.log(basket.length)
               </select>
             </div>
 
-            <Link to="/SignIn">
-              <p>Sign In</p>
+            <Link to={!user &&"/auth"}>
+            <div>
+              {
+
+              user?(
+                <>
+                <p> hello {user?.email?.split("@")[0]}  </p>
+                <span> Signout</span>
+                  </>
+
+              ):(
+                <p>Hello, Sign in</p>
+              )
+            
+            }
+            </div>
+              {/* <p>Sign In</p> */}
               <span>Account & Lists</span>
             </Link>
 

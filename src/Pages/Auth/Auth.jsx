@@ -7,6 +7,7 @@ import { DataContext } from '../../Components/DataProvider/DataProvider'
 import{signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase/auth"
 import { Type } from '../../Utility/actiontype'
 import {ClipLoader} from "react-spinners"
+import { useNavigate } from 'react-router-dom'
 function Auth() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -15,6 +16,7 @@ function Auth() {
   ,signUp:false})
 
 const [{user},dispatch]=useContext(DataContext)
+const navigate=useNavigate()
   console.log(user)
   const authHandler=(e)=>{
 e.preventDefault()
@@ -24,8 +26,10 @@ if(e.target.name==="signin"){
   signInWithEmailAndPassword(auth,email,password).then((userinfo)=>{
     console.log(userinfo);
     dispatch({type:Type.SET_USER,user:userinfo.user})
+    navigate("/")
     setLoading({...loading,signIn:false})
-  }).catch((error)=>{
+  }
+).catch((error)=>{
   
 
 setError(error.message)
@@ -42,6 +46,7 @@ else{
    
     dispatch({type:Type.SET_USER,user:userinfo.user})
     setLoading({...loading,signUp:false}) 
+     navigate("/")
   })
   .catch((error)=>{
 setError(error.message)
@@ -56,7 +61,7 @@ setLoading({...loading,signUp:false})
       
           <div>
 
-            <Link >
+            <Link to={"/"} >
             
             <img   src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="logo" />
             </Link>
