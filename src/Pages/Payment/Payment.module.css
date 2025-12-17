@@ -29,3 +29,10 @@
 .flex div{
     height: auto !important;
 }
+.payment_details{
+    /* border:1px solid lightgray;
+    padding:20px;
+    border-radius:7px; */
+    max-width: 350px;
+    width: 100%;
+}

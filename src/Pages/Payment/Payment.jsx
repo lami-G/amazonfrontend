@@ -1,17 +1,29 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import LayOut from '../../Components/LayOut/LayOut'
 import classes from './Payment.module.css'
 import { DataContext } from '../../Components/DataProvider/DataProvider';
 import ProductCard from '../../Components/Product/ProductCard';
+import {useStripe,useElements,CardElement} from '@stripe/react-stripe-js';
 function Payment() {
 const [{user,basket}, dispatch] = useContext(DataContext);
 console.log(user)
  const totalItem=basket?.reduce((amount,item)=>{
     return item.amount + amount
   },0)
+const [carderror,setcarderror]=useState(null);
+const stripe=useStripe();
+const elements=useElements();
+
+const handlechange=(e)=>{
+  console.log(e)
+ e?.error?.message ? setcarderror(e?.error?.message): setcarderror("")
+}
 
 
-  return ( <LayOut>
+
+  return (
+    
+    <LayOut>
     {/*header */}
             <div className={classes.payment_header}> Checkout({totalItem}) items</div>
 {/*            payment method */}
@@ -23,7 +35,7 @@ console.log(user)
 
 <div>
 <div>
-{user.email}
+{user?.email}
   
 </div>
 <div>={true}
@@ -57,11 +69,16 @@ chicago, IL
 {/* card*/}
 <div className={classes.flex}>
   <h3> payment method</h3>
-  <div>  
+  <div className={classes.payment_details}>  
     
     
      <div>
-<form action=" ">      </form>
+<form action=" ">  
+
+  {carderror && <small>{carderror}</small>}
+  <CardElement onChange={handlechange} />
+  
+      </form>
 
      </div>
   
