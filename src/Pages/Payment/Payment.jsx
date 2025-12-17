@@ -57,7 +57,20 @@ chicago, IL
 {/* card*/}
 <div className={classes.flex}>
   <h3> payment method</h3>
+  <div>  
+    
+    
+     <div>
+<form action=" ">      </form>
+
+     </div>
   
+  
+       </div>
+  
+
+
+
    </div>
 </section>
 
