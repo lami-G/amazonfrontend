@@ -5,6 +5,7 @@ import { DataContext } from '../../Components/DataProvider/DataProvider';
 import ProductCard from '../../Components/Product/ProductCard';
 import {useStripe,useElements,CardElement} from '@stripe/react-stripe-js';
 import Currencyformat from '../../Components/Currencyformat/Currencyformat';
+import { axiosInstance } from '../../Api/axios'; 
 function Payment() {
 const [{user,basket}, dispatch] = useContext(DataContext);
 console.log(user)
@@ -23,7 +24,39 @@ const handlechange=(e)=>{
  e?.error?.message ? setcarderror(e?.error?.message): setcarderror("")
 }
 
+const handlePayment=async(e)=>{
+e.preventDefault()
 
+try {
+  // backend || functions -----> contact to client secret
+ const response=await axiosInstance({  
+  
+  method:"POST",
+  url:`/payments/create?total=${total*100}`  
+
+ }
+ 
+ )  
+ console.log(response.data)
+
+const clientsecret=response.data?.clientSecret
+
+
+} catch (error) {
+  
+}
+
+
+
+
+// react side confirmation
+
+
+
+
+// after cconfirmation----->order firestore
+
+}
 
   return (
     
@@ -78,9 +111,9 @@ chicago, IL
     
      <div>
       <div className={classes.payment_details}>           
-<form action=" ">  
+<form onSubmit={handlePayment}>  
 {/* error*/}
-  {carderror && <small style={{color:red}}>{carderror}</small>}
+  {carderror && <small style={{color:"red"}}>{carderror}</small>}
   <CardElement onChange={handlechange} />
   {/* price   */ }
 
@@ -92,7 +125,7 @@ chicago, IL
   
   
   </div>     
-  <button>  Pay now</button>
+  <button type='submit'>  Pay now</button>
   
        </div>
 

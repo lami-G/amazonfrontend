@@ -7,6 +7,9 @@
     position: relative;
 }
 
+
+
+
 .card_container:hover .button {
     display: block;
 }
@@ -83,7 +86,9 @@ padding: 10px 0px;
     .product_flexed {
         flex-direction: column;
        display:flex;
-    }
+    } 
+
+
     
    
     
