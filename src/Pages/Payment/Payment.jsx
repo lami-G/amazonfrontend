@@ -4,12 +4,16 @@ import classes from './Payment.module.css'
 import { DataContext } from '../../Components/DataProvider/DataProvider';
 import ProductCard from '../../Components/Product/ProductCard';
 import {useStripe,useElements,CardElement} from '@stripe/react-stripe-js';
+import Currencyformat from '../../Components/Currencyformat/Currencyformat';
 function Payment() {
 const [{user,basket}, dispatch] = useContext(DataContext);
 console.log(user)
  const totalItem=basket?.reduce((amount,item)=>{
     return item.amount + amount
   },0)
+
+  const total = basket.reduce((amount, item) =>{
+  return  item.price*item.amount + amount },0)
 const [carderror,setcarderror]=useState(null);
 const stripe=useStripe();
 const elements=useElements();
@@ -69,16 +73,33 @@ chicago, IL
 {/* card*/}
 <div className={classes.flex}>
   <h3> payment method</h3>
-  <div className={classes.payment_details}>  
+  <div className={classes.payment_container}>  
     
     
      <div>
+      <div className={classes.payment_details}>           
 <form action=" ">  
-
-  {carderror && <small>{carderror}</small>}
+{/* error*/}
+  {carderror && <small style={{color:red}}>{carderror}</small>}
   <CardElement onChange={handlechange} />
+  {/* price   */ }
+
+<div className={classes.payment_price}>      
+   <div>
+  <span style={{display:"flex",gap:"10px"}}>  <p> Total Order | </p>   <Currencyformat amount={total}/>  </span>
   
+  
+  
+  
+  </div>     
+  <button>  Pay now</button>
+  
+       </div>
+
+
+
       </form>
+       </div>
 
      </div>
   
