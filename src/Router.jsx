@@ -11,6 +11,7 @@ import ProductDetail from './Pages/ProductDetail/ProductDetail'
 import Auth from './Pages/Auth/Auth'
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 const stripePromise = loadStripe('pk_test_51SbKkQDBUVt7xtbV8dl2o6qGsYii9WDxVsDZIse2Jm6rNO6QTCsMBCpT3C1rBrax8gpmCGCZS8adEmerkkdi1NvL00FP8KdF4l');
 function Routering() {
   return (
@@ -21,8 +22,12 @@ function Routering() {
                <Route path='/' element={<Landing/>}/> 
                  <Route path='/auth' element={<Auth/>}/> 
   <Route path='/payment' element={
-    <Elements stripe={stripePromise}>   <Payment/ > 
-    </Elements>
+
+    <ProtectedRoute msg={"you must login"}
+             redirect={"/payment"}         >  <Elements stripe={stripePromise}>   <Payment/ > 
+    </Elements> </ProtectedRoute>
+
+   
   
     
     

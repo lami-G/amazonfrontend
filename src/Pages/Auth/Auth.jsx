@@ -8,12 +8,14 @@ import{signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase
 import { Type } from '../../Utility/actiontype'
 import {ClipLoader} from "react-spinners"
 import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 function Auth() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [error,setError]=useState(null)
   const [loading,setLoading]=useState({signIn:false
   ,signUp:false})
+  const navstatedata=useLocation()
 
 const [{user},dispatch]=useContext(DataContext)
 const navigate=useNavigate()
