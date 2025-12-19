@@ -28,11 +28,11 @@ if(e.target.name==="signin"){
   signInWithEmailAndPassword(auth,email,password).then((userinfo)=>{
     console.log(userinfo);
     dispatch({type:Type.SET_USER,user:userinfo.user})
-    navigate("/")
+     navigate(navstatedata?.state?.redirect|| "/");
     setLoading({...loading,signIn:false})
   }
 ).catch((error)=>{
-  
+   
 
 setError(error.message)
 
@@ -48,7 +48,7 @@ else{
    
     dispatch({type:Type.SET_USER,user:userinfo.user})
     setLoading({...loading,signUp:false}) 
-     navigate("/")
+     navigate(navstatedata?.state?.redirect|| "/");
   })
   .catch((error)=>{
 setError(error.message)
@@ -70,6 +70,31 @@ setLoading({...loading,signUp:false})
           </div>
     <div className={ClassNames.login_container}>
       <h1>Sign in</h1>
+{ navstatedata?.state?.msg  && (
+
+
+<small style={
+
+
+{padding:"5px",
+textAlign:"center",
+color:"red",
+fontWeight:"bold"
+
+
+   }
+}
+
+
+
+ 
+> 
+{ navstatedata?.state?.msg }
+ </small>
+
+)}
+
+
 <form action="" >
 
 
