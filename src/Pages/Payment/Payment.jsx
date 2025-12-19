@@ -6,6 +6,8 @@ import ProductCard from '../../Components/Product/ProductCard';
 import {useStripe,useElements,CardElement} from '@stripe/react-stripe-js';
 import Currencyformat from '../../Components/Currencyformat/Currencyformat';
 import { axiosInstance } from '../../Api/axios'; 
+import {ClipLoader} from "react-spinners"
+import { db } from '../../Utility/firebase';
 function Payment() {
 const [{user,basket}, dispatch] = useContext(DataContext);
 console.log(user)
@@ -16,6 +18,7 @@ console.log(user)
   const total = basket.reduce((amount, item) =>{
   return  item.price*item.amount + amount },0)
 const [carderror,setcarderror]=useState(null);
+const [processing,setprocessing]=useState(false)
 const stripe=useStripe();
 const elements=useElements();
 
@@ -28,6 +31,7 @@ const handlePayment=async(e)=>{
 e.preventDefault()
 
 try {
+  setprocessing(true)
   // backend || functions -----> contact to client secret
  const response=await axiosInstance({  
   
@@ -39,22 +43,56 @@ try {
  )  
  console.log(response.data)
 
-const clientsecret=response.data?.clientSecret
+const clientSecret=response.data?.clientSecret
+// client side or react side confirmation
+const {paymentIntent} =await stripe.confirmCardPayment(
 
+  clientSecret,
+  { payment_method:{
+    card:elements.getElement(CardElement)
+  }}
+  
+  
+)
+console.log(paymentIntent)
+
+// after cconfirmation----->order firestore
+await db.collection("users")
+.doc(user.uid)
+.collection("orders")
+.doc(paymentIntent.id)
+.set(
+{
+basket:basket,
+amount:paymentIntent.amount,
+created:paymentIntent.created
+
+}
+
+)
+
+
+
+
+
+
+
+
+setprocessing(false)
 
 } catch (error) {
-  
+  console.log(error)
 }
 
 
 
 
-// react side confirmation
 
 
 
 
-// after cconfirmation----->order firestore
+
+
 
 }
 
@@ -125,7 +163,24 @@ chicago, IL
   
   
   </div>     
-  <button type='submit'>  Pay now</button>
+
+
+  <button type="submit"> 
+  {
+
+processing? (
+
+  <div className={classes.loading}>
+    <ClipLoader color="gray" size={12}/>
+    <p> please</p>
+    
+           </div>
+): "  Pay now"
+
+
+  }
+   
+   </button>
   
        </div>
 
