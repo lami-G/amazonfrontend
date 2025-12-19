@@ -8,6 +8,7 @@ import Currencyformat from '../../Components/Currencyformat/Currencyformat';
 import { axiosInstance } from '../../Api/axios'; 
 import {ClipLoader} from "react-spinners"
 import { db } from '../../Utility/firebase';
+import { useNavigate } from 'react-router-dom';
 function Payment() {
 const [{user,basket}, dispatch] = useContext(DataContext);
 console.log(user)
@@ -21,6 +22,7 @@ const [carderror,setcarderror]=useState(null);
 const [processing,setprocessing]=useState(false)
 const stripe=useStripe();
 const elements=useElements();
+const navigate=useNavigate()
 
 const handlechange=(e)=>{
   console.log(e)
@@ -79,6 +81,11 @@ created:paymentIntent.created
 
 
 setprocessing(false)
+
+navigate("/orders", { state: { msg: "you have placed new order" } });
+
+
+
 
 } catch (error) {
   console.log(error)
