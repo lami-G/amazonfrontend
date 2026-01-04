@@ -5,7 +5,7 @@ import SignUp from './Pages/Auth/Auth'
 import Payment from './Pages/Payment/Payment'
 import Orders from './Pages/Orders/Orders'
 import Cart from './Pages/Cart/Cart'
-// import SignIn from './Pages/Auth/SignIn'
+
 import Results from './Pages/Results/Results'
 import ProductDetail from './Pages/ProductDetail/ProductDetail'
 import Auth from './Pages/Auth/Auth'
@@ -29,12 +29,6 @@ function Routering() {
     <ProtectedRoute msg={"you must login to pay"}
              redirect={"/payment"}         >  <Elements stripe={stripePromise}>   <Payment/ > 
     </Elements> </ProtectedRoute>
-
-   
-  
-    
-    
-    
     }/> 
     <Route path='/orders' element={
       

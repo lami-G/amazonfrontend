@@ -3,7 +3,8 @@ import LayOut from '../../Components/LayOut/LayOut'
 import { useParams } from 'react-router-dom'
 import { productUrl } from '../../Api/endpoint.js'
 import classes from './Results.module.css'
-// import ProductCard from '../../Components/ProductCard/ProductCard.jsx'
+
+
 import axios from 'axios'
 import ProductCard from '../../Components/Product/ProductCard.jsx'
 import Loader from '../../Components/Loader/Loader.jsx'

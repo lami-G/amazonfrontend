@@ -7,7 +7,6 @@ import { BiCart } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
 import {auth} from "../../Utility/firebase"
-
 const Header = () => {
   const [{user,basket}, dispatch] = useContext(DataContext);
  const totalItem=basket?.reduce((amount,item)=>{

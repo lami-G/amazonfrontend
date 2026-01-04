@@ -5,7 +5,6 @@ import classes from './Header.module.css'
 function LowerHeader() {
     return (
         <div className={classes.lower_container}>
-
             <ul>
                 <li>
                     <AiOutlineMenu />
